@@ -1,3 +1,4 @@
+
 /*
 1 - Sonuc Listesinde Boyutlar
 Büyüklüğe Göre Listenecek
@@ -26,6 +27,18 @@ import java.util.Scanner;
 
 public class Arama 
 {
+    /**
+     * Kullanıcıdan Başlangıç Klasorunu,
+     * Ve Dosya Isminde Gececek Arama Değerini Alın
+     * Daha Sonra, Bu Arama Sonucuna Uyan Tüm Dosya Ve Klasorleri
+     * Belli Bir Formatta Listeleyin
+     * 
+     * #        Dosya Adı               Türü                Boyut
+     * 1        C:\Users\araba.txt      Dosya               1152
+     * 2        C:\Users\test\java.txt  Dosya               17824
+     * 3        C:\Users\archive        Klasor              0
+     */
+    
     public static Scanner oku = new Scanner(System.in);
     public static String val = "";
     public static ArrayList<File> rL = new ArrayList<>();
@@ -35,17 +48,41 @@ public class Arama
         //Eğer arama sonucu yoksa
         if(rL.isEmpty())
             System.out.println("İstenilen kriterlerde dosya bulunamadı.");
-        else
+        else  
         {
-            String f = "%3d\t%-50s\t%6s\t%10d\n";
+            String f = "%3d\t%-50s\t%15s\t%10s\n";
+            // ArrayListte Toplanan Her Dosyayı
             for (int i = 0; i < rL.size(); i++) {
                 File dosya = rL.get(i);
+                String ext = "";
+                
+                if (dosya.isFile())
+                {
+                    String ad = dosya.getName();
+                    if (ad.lastIndexOf('.') > 0)
+                    {
+                        ext = ad.substring(ad.lastIndexOf('.')).toUpperCase();
+                    }
+                    
+                }
+                
+                String dN = "";
+                String ad = dosya.getName();
+                
+                if (ad.length() < 40)
+                    dN = ad;
+                
+                else
+                {
+                    dN = ad.substring(0,37)+"...";
+                }
+                
                 System.out.printf(
                         f, 
                         (i + 1), 
-                        dosya.getAbsolutePath(), 
-                        (dosya.isFile() ? "Dosya" : "Klasor"), 
-                        dosya.length());
+                        dN, 
+                        (dosya.isFile() ? "Dosya ("+ext+")" : "Klasor"),
+                        getSize(dosya));
             }
         }
     }
@@ -88,24 +125,18 @@ public class Arama
         //Geçmesi için 
     }
     
-    public static void boyut(int x)
+    public static String getSize(File f)
     {
+        double x = (double) f.length();
+        String[] s = {"Byte", "KB", "MB", "TB"};
         int cnt = 0;
         while(x > 1024)
         {
-            x/=1024;
+            x/=1024.0;
             cnt++;
         }
-        if(cnt == 0)
-            System.out.println(x + " BYTE");
-        if(cnt == 1)
-             System.out.println(x + " KB");
-        if(cnt == 2)
-            System.out.println(x + " MB");
-        if(cnt == 3)
-            System.out.println(x + " GB");
-        if(cnt == 4)
-            System.out.println(x + " TB");
+        
+        return String.format("%.2f %s", x, s[cnt]);
     }
     
     public static void main(String[] args) 
