@@ -122,7 +122,8 @@ public class AddNewMovie extends javax.swing.JFrame {
             int imdb = Integer.parseInt(tfImdb.getText());
             
             db.addMovie(id, filmAd, tur, sure, imdb);
-
+            Movies.getMovies();
+            this.dispose();
         } catch (Exception e) { e.printStackTrace(); }
     }//GEN-LAST:event_btnFilmEkleActionPerformed
 

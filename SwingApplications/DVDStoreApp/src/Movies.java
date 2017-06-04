@@ -7,11 +7,18 @@ import javax.swing.table.DefaultTableModel;
 
 public class Movies extends javax.swing.JFrame {
     
-    DefaultTableModel dtm;
+    public static DefaultTableModel dtm;
     public Movies() throws Exception{
         initComponents();
+        getMovies();
+    }
+    
+    public static void getMovies() throws Exception
+    {
         
+        dtm = (DefaultTableModel) jTable1.getModel();
         DBConnection db = new DBConnection();
+        dtm.setRowCount(0);
         try {
             ResultSet sonuc = db.getMovies();
 
@@ -141,10 +148,11 @@ public class Movies extends javax.swing.JFrame {
             int sonuc = JOptionPane.showConfirmDialog(this, "Seçilen Kayıt Silinsin Mi ?");
             System.out.println(sonuc);
 
-            String selected = dtm.getValueAt(ndx, 0).toString();
+            int selected = (int)jTable1.getValueAt(ndx, 0);
             if (sonuc == JOptionPane.YES_OPTION)
             {
-                db.delMovie(Integer.parseInt(selected));
+                db.delMovie(selected);
+                getMovies();
             }
         } catch (Exception e) { e.printStackTrace(); }
     }//GEN-LAST:event_btnDelActionPerformed
@@ -191,7 +199,7 @@ public class Movies extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public static javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
