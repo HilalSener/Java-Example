@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>JavaScript Örnekleri</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript">
+
+            function greet()
+            {
+                alert("Merhaba!");
+                console.log("greet Fonksiyonu Calisti");
+            }
+
+            function sayiGoster()
+            {
+                var a = 10;
+                var b = 20;
+                alert("Sonuc : " + (a + b));
+            }
+
+            function showIn() {
+                console.log("pointer elemanın üstüne");
+            }
+            function showOut() {
+                console.log("pointer elemanın sınırları dışında");
+            }
+
+        </script>
+    </head>
+    <body onload="greet()">
+        <button  onclick="sayiGoster()">Toplam Goster</button>
+        <h1 onmouseover="showIn()" onmouseout="showOut()">Merhaba</h1>
+    </body>
+</html>

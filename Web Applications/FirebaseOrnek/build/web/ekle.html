@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-messaging.js"></script>
+        <script>
+            var config = {
+                apiKey: "AIzaSyDpHXXkCVlpWT6KGFC-22w1-_h0HXFHah0",
+                authDomain: "myapp-4f43a.firebaseapp.com",
+                databaseURL: "https://myapp-4f43a.firebaseio.com",
+                projectId: "myapp-4f43a",
+                storageBucket: "myapp-4f43a.appspot.com",
+                messagingSenderId: "77697197765"
+            };
+            var app = firebase.initializeApp(config);
+            var db = app.database();
+        </script>
+    </head>
+    <body>
+        <form id="ekle_form">
+            <input type="text" id="kitap_adi" placeholder="Kitap Adı"/>
+            <br/>
+            <input type="text" id="yazar_adi" placeholder="Yazar Adı"/>
+            <br/>
+            <input type="text" id="fiyat" placeholder="Fiyat"/>
+            <br/>
+            <input type="submit" value="Ekle"/>
+        </form>
+        <script>
+            $("#ekle_form").submit(function (e)
+            {
+                e.preventDefault();
+                var yeniKitap =
+                        {
+                            ad: $("#kitap_adi").val(),
+                            yazar: $("#yazar_adi").val(),
+                            fiyat: $("#fiyat").val()
+                        };
+                console.log(yeniKitap);
+                
+                //Kitaplar altında yeni bir key oluştur
+                var newKitapKey = db.ref().child('kitaplar').push().key;
+                console.log("Ekleme yapılacak key: " + newKitapKey);
+                
+                //İstenilen key altına Kitap object i ekle
+                db.ref('kitaplar/'+newKitapKey).set(yeniKitap);
+                return false;
+            });
+        </script>
+    </body>
+</html>

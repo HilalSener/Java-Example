@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-messaging.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-storage.js"></script>
+        <script>
+            var config = {
+                apiKey: "AIzaSyDpHXXkCVlpWT6KGFC-22w1-_h0HXFHah0",
+                authDomain: "myapp-4f43a.firebaseapp.com",
+                databaseURL: "https://myapp-4f43a.firebaseio.com",
+                projectId: "myapp-4f43a",
+                storageBucket: "myapp-4f43a.appspot.com",
+                messagingSenderId: "77697197765"
+            };
+
+            firebase.initializeApp(config);
+
+            // Get a reference to the storage service, which is used to create references in your storage bucket
+            var storage = firebase.storage();
+
+            // Create a storage reference from our storage service
+            var storageRef = storage.ref();
+
+            // Create a child reference
+            var ref = storageRef.child('resimler');
+        </script>
+    </head>
+    <body>
+        <form id="ul_form" name="ul_form">
+            Dosya: <br/>
+            <input type="file" name="dosya" id="dosya" />
+            <br/>
+            <input type="submit" value="Yükle" />
+        </form>
+
+        <h1 id="prg"></h1>
+        <button id="devam">Devam Et</button>
+        <button id="durdur">Durdur</button>
+
+        <script>
+            var ulTask;
+            
+            $("#ul_form").submit(function (e)
+            {
+                var file = document.forms['ul_form']['dosya'].files[0];
+                console.log("Dosya Bilgileri : ");
+                console.log(file.name + " " + file.type + " " + file.size);
+
+
+                var dosyaRef = ref.child(file.name);
+                console.log('Dosya Yükleniyor');
+                ulTask = dosyaRef.put(file);
+
+
+                ulTask.on('state_changed',
+                        function (snapshot)
+                        {
+                            // State Degistiginde Calisir
+                            console.log('State Değişti');
+                            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                            $("#prg").text("% " + progress);
+
+                            switch (snapshot.state)
+                            {
+                                case firebase.storage.TaskState.PAUSED:
+                                    console.log('Yükleme Durdu');
+                                    break;
+
+                                case firebase.storage.TaskState.RUNNING:
+                                    console.log('Yükleme Devam Ediyor');
+                                    break;
+                            }
+                        },
+                        function (error)
+                        {
+                            // Upload Kesilmisse Calisan Block
+                            alert("Net Gitti :(");
+                        },
+                        function ()
+                        {
+                            // Dosya Indırme Tamamlaninca Calisan Block
+                            var downloadURL = ulTask.snapshot.downloadURL;
+                            alert("Dosya Adresi : " + downloadURL);
+                        });
+                return false;
+            });
+
+            $("#devam").click(function ()
+            {
+                ulTask.resume();
+            });
+
+            $("#durdur").click(function ()
+            {
+                ulTask.pause();
+            });
+        </script>
+    </body>
+</html>

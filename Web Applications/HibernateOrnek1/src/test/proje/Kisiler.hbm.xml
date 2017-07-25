@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 14, 2017 10:55:17 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="test.proje.Kisiler" table="kisiler" catalog="hib_test_db" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="ad" type="string">
+            <column name="ad" />
+        </property>
+        <property name="soyad" type="string">
+            <column name="soyad" />
+        </property>
+        <property name="yas" type="java.lang.Integer">
+            <column name="yas" />
+        </property>
+    </class>
+</hibernate-mapping>

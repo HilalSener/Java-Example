@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="jquery-3.2.1.min.js"></script>
+    </head>
+    <body>
+        <input type="text" id="ad" placeholder="Adınız" />
+        <br/>
+        <button type="button" id="btn">OK</button>
+        <br/>
+        <h1 id="sonuc"></h1>
+        
+        <script>
+            $("#btn").click(function()
+            {
+                var txt = "Merhaba " + $("#ad").val();
+                $("#sonuc").html(txt);
+            });
+            
+            //sayfa yüklendiğinde otomatik çalışacak bir kod bloğu varsa
+            //document.ready içinde çalıştırılır
+            $(document).ready(function ()
+            {
+                console.log("Sayfa yüklendi");
+            });
+        </script>
+    </body>
+</html>

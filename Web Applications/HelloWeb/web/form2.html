@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="ekle.jsp" method="post">
+            <input type="hidden" name="op" value="add"/>
+            <input required type="text" name="kisi_ad" placeholder="Kişi Adı" />
+            <br/>
+            <input required type="text" name="kisi_soyad" placeholder="Kişinin soyadı" />
+            <br/>
+            <input required type="number" name="kisi_yas" min="0" max="130" placeholder="Yaş" />
+            <br/>
+            <input type="submit" value="Gönder" />
+        </form>
+    </body>
+</html>

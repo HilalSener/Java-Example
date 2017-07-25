@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-messaging.js"></script>
+        <script>
+            var config = {
+                apiKey: "AIzaSyDpHXXkCVlpWT6KGFC-22w1-_h0HXFHah0",
+                authDomain: "myapp-4f43a.firebaseapp.com",
+                databaseURL: "https://myapp-4f43a.firebaseio.com",
+                projectId: "myapp-4f43a",
+                storageBucket: "myapp-4f43a.appspot.com",
+                messagingSenderId: "77697197765"
+            };
+            var app = firebase.initializeApp(config);
+            var db = app.database();
+            //kitaplar üzerinde bir değişiklik yapıldığında çalışcak method
+            db.ref("kitaplar").on("value", function (snapshot)
+            {
+                console.log("Kayıt sayısı: " + snapshot.numChildren());
+                snapshot.forEach(function (childSnapshot) {
+                    var key = childSnapshot.key;
+                    var ad = childSnapshot.val().ad;
+                    var yazar = childSnapshot.val().yazar;
+                    var fiyat = childSnapshot.val().fiyat;
+
+                    var str = "<tr>";
+                    str += "<td>" + ad + "</td>";
+                    str += "<td>" + yazar + "</td>";
+                    str += "<td>" + fiyat + "</td>";
+                    str += "<td><a href=></a></td>";
+                    str += "<tr>";
+                    
+                    $("#veri").append(str);
+                    {
+                        
+                    }
+                    
+                    setDel();
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <!-- <ul id="list"></ul> -->
+        <table id="list" style="border: 1px solid black;width: 100%">
+            <thead>
+            <th>Ad</th>
+            <th>Yazar</th>
+            <th>Fiyat</th>
+        </thead>
+        <tbody id="veri">
+            
+        </tbody>
+    </table>
+</body>
+<script>
+    function setDel()
+    {
+        $(".del").click(function ()
+        {
+            var kitapID = $(this).attr('rec_id');
+            //alert('Secilen Kitap:' + kitap);
+            //Id si verilen object i vt den silme
+            db.ref('kitaplar/' + kitapID).set(null);
+        });
+    }
+</script>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="jquery-3.2.1.min.js"></script>
+    </head>
+    <body>
+        <button id="btn">Gizle</button>
+        <button id="btn2">Göster</button>
+        <br/>
+        <div id="content" style="background-color: #0099CC; padding: 50px">
+            <h1>Merhaba<h1>
+        </div>
+        <br/>
+        <a href="#" class="myLink">Click To Visit</a><br/>
+        <a href="#" class="myLink">Click To Visit</a><br/>
+        <a href="#" class="myLink">Click To Visit</a><br/>
+        <button id="doOp">Click To Start</button>
+        <script>
+            //Id si doOp olan butona tıklandığında
+            $("#doOp").click(function()
+            {
+                setTimeout()
+            });
+            
+             //class adı myLink olan komponente tıklandığında
+             $("#myLink").click(function()
+             {
+               //$(this) eventin gerçekleştiği eleman
+               var adres = $(this).attr('href');
+               alert("Gidilecek Adres: " + adres);
+               
+               $(this).css("background-color","red");
+             });
+             
+            //id si btn olan komponente tıklandığında
+            $("#btn").click(function()
+            {
+                //alert("Gizle");
+                /*
+                $("#content").hide(5000, function() { 
+                    alert("Bye");
+                });
+                */
+               //$("#content").slideUp(1000);
+               $("#content").fadeTo(3000, 0.0);
+            });
+            
+             $("#btn2").click(function()
+            {
+                //alert("Göster");
+                //$("#content").show(1000);
+                //$("#content").slideDown(2500);
+                $("#content").fadeTo(1000, 1.0);
+            });
+        </script>
+    </body>
+</html>

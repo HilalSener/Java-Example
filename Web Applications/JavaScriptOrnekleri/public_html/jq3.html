@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="jquery-3.2.1.min.js"></script>
+    </head>
+    <body>
+        <form action="aaa.php" method="post" id="loginForm">
+            <input type="text" name="ad" id="ad" />
+            <br/>
+            <input type="text" name="sad" id="sad" />
+            <br/>
+            <input type="submit" />
+        </form>
+        
+        <script>
+            //loginForm submit edilirken
+            $("#loginForm").submit(function()
+            {
+                var deger = $(this).serialize();
+                alert("Girilen değer: " + deger);
+                
+                var ad = $("#ad").val();
+                if(ad.length < 3)
+                {
+                    $("#ad").css("background-color", "red");
+                    $("#ad").val("");
+                    $("#ad").focus();
+                    return false; 
+                }
+                else 
+                {
+                    $("ad").css("background-color","white");
+                    return true;
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            function validate()
+            {
+                var girilenEPosta = document.getElementById("em").value;
+                var hasErr = girilenEPosta.includes("root") || girilenEPosta.includes("admin");
+                
+                //alert("Has Error" + hasErr);
+                
+                /*
+                if(hasErr) return false;
+                else
+                    return true;
+                */
+               
+               if(hasErr)
+               {
+                   girilenEPosta.style.backgroundColor = "#FF0000";
+               }
+               else
+               {
+                   girilenEPosta.style.backgroundColor = "#FFFFFF";
+               }
+              
+               return !hasErr;
+            }
+        </script>
+    </head>
+    <body>
+        <form action="islem.jsp" method="post" onsubmit="return validate()">
+            <input type="text" required name="ad" placeholder="Adınız" />
+            <br/>
+            <input type="email" required id="em" name="em" placeholder="Email" />
+            <br/>
+            <input type="number" min="1900" max="2017" placeholder="Doğum yılı" required />
+            <br/>
+            <input type="date" required placeholder="D.Tarihi" />
+            <br/>
+            <input type="submit" value="Gönder" />
+        </form>
+    </body>
+</html>
