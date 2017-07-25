@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context="tr.com.wissen.calculator.MainActivity">
+
+    <EditText
+        android:id="@+id/sayi1"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Sayı 1"/>
+
+    <EditText
+        android:id="@+id/sayi2"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Sayı 2"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/toplama"
+            android:onClick="topla"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="+"/>
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/cikarma"
+            android:onClick="cikart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="-"/>
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/carpma"
+            android:onClick="carp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="x"/>
+        <Button
+            android:layout_weight="1"
+            android:id="@+id/bolme"
+            android:onClick="bol"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="/"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/txtsonuc"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Sonuç"/>
+</LinearLayout>
