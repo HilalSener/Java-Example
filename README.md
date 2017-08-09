@@ -1,6 +1,6 @@
 # Java-Example
 
-This project consists of various java samples,
+This project consists of various java samples.
 
 Topics;
 
